@@ -110,7 +110,7 @@ export default function Dashboard({ taskType, targetColumn, featureColumns, onTr
       if (datasetFile) {
         const formData = new FormData();
         formData.append('file', datasetFile);
-        const uploadResponse = await fetch('http://localhost:8000/upload-dataset', {
+        const uploadResponse = await fetch('https://ml-platform-sl4g.onrender.com/upload-dataset', {
           method: 'POST',
           body: formData
         });
