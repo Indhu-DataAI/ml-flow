@@ -34,7 +34,7 @@ from typing import Dict, Any, List, Optional, Union
 import warnings
 import base64
 from sklearn.inspection import permutation_importance
-import shap
+# import shap
 from fastapi.responses import StreamingResponse
 
 warnings.filterwarnings('ignore')
@@ -379,15 +379,15 @@ async def train_model(request: TrainingRequest):
         global model_explainer, X_train_sample
         X_train_sample = X_train_final[:100]  # Store sample for SHAP
         
-        # Initialize explainer for tree-based models
-        try:
-            if 'tree' in request.algorithm or 'forest' in request.algorithm or 'xgboost' in request.algorithm:
-                model_explainer = shap.TreeExplainer(current_model)
-            else:
-                model_explainer = shap.Explainer(current_model, X_train_sample)
-        except Exception as e:
-            logger.warning(f"Could not initialize explainer: {e}")
-            model_explainer = None
+        # # Initialize explainer for tree-based models
+        # try:
+        #     if 'tree' in request.algorithm or 'forest' in request.algorithm or 'xgboost' in request.algorithm:
+        #         model_explainer = shap.TreeExplainer(current_model)
+        #     else:
+        #         model_explainer = shap.Explainer(current_model, X_train_sample)
+        # except Exception as e:
+        #     logger.warning(f"Could not initialize explainer: {e}")
+        #     model_explainer = None
         
         # Make predictions
         y_pred = current_model.predict(X_test_final)
